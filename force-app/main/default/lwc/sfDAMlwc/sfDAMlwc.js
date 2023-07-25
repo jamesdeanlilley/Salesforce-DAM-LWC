@@ -1,24 +1,24 @@
-import { LightningElement, wire } from 'lwc';
-import getFinanceFields from '@salesforce/apex/AccountController.getFinanceFields';
-import getHealthcareFields from '@salesforce/apex/AccountController.getHealthcareFields';
-// Import more Apex methods for each industry
+import { LightningElement, track } from 'lwc';
 
-export default class AccountFields extends LightningElement {
-    industryOptions = [
-        { label: 'Finance', value: 'Finance' },
-        { label: 'Healthcare', value: 'Healthcare' },
-        // Add more options for each industry
-    ];
-    selectedIndustries = [];
-
-    @wire(getFinanceFields)
-    financeFields;
-
-    @wire(getHealthcareFields)
-    healthcareFields;
-    // Add more @wire methods for each industry
-
-    handleIndustryChange(event) {
-        this.selectedIndustries = event.detail.value;
+export default class App extends LightningElement {
+    @track value = ['Education'];
+    
+    get options() {
+        return [
+            { label: 'Education', value: 'Education' },
+            { label: 'Faith', value: 'Faith' },
+        ];
+    }
+    
+    get isEducation() {
+        return this.value.includes('Education');
+    }
+    
+    get isFaith() {
+        return this.value.includes('Faith');
+    }
+    
+    handleChange(event) {
+        this.value = event.detail.value;
     }
 }
