@@ -1,3 +1,10 @@
 <template>
-    
-</template>
+    <lightning-checkbox-group label="Industries" options={industryOptions} value={selectedIndustries} onchange={handleIndustryChange}></lightning-checkbox-group>
+    <template if:true={selectedIndustries.includes('Finance')}>
+        <!-- Display finance fields here -->
+    </template>
+    <template if:true={selectedIndustries.includes('Healthcare')}>
+        <!-- Display healthcare fields here -->
+    </template>
+    <!-- Add more templates for each industry -->
+</template>    
